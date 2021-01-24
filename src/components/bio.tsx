@@ -52,7 +52,7 @@ const Bio = () => {
         />
       )}
       {author?.name && (
-        <p>
+        <p className={'text-blue-500'}>
           Written by <strong>{author.name}</strong> {author?.summary || null}
           {` `}
           <a href={`https://twitter.com/${social?.twitter || ``}`}>
