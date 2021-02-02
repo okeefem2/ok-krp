@@ -3,7 +3,13 @@ module.exports = {
     title: `Michael O'Keefe Photography`,
     author: {
       name: `Michael O'Keefe`,
-      summary: `Head engineer at OK enterprises`,
+      summary: [
+        `Something something something`,
+        `Something something something`,
+        `Something something something`,
+        `Something something something`,
+        `Something something something`,
+      ],
     },
     description: `Photography site for Michael O'Keefe Photography`,
     siteUrl: `https://gatsby-starter-blog-demo.netlify.app/`,

@@ -1,20 +1,13 @@
-/**
- * Bio component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.com/docs/use-static-query/
- */
-
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
-import Image from "gatsby-image"
+import Img from 'gatsby-image';
 
 const Bio = () => {
   const data = useStaticQuery(graphql`
     query BioQuery {
-      avatar: file(absolutePath: { regex: "/profile-pic.jpg/" }) {
+      bioImage: file(relativePath: { eq: "australasia.jpg" }) {
         childImageSharp {
-          fixed(width: 50, height: 50, quality: 95) {
+          fixed(width: 300, height: 300, quality: 95) {
             ...GatsbyImageSharpFixed
           }
         }
@@ -25,42 +18,30 @@ const Bio = () => {
             name
             summary
           }
-          social {
-            twitter
-          }
         }
       }
     }
-  `)
+  `);
+
+  console.log(data);
 
   // Set these values by editing "siteMetadata" in gatsby-config.js
   const author = data.site.siteMetadata?.author
-  const social = data.site.siteMetadata?.social
 
-  const avatar = data?.avatar?.childImageSharp?.fixed
+  const bioImage = data?.bioImage?.childImageSharp?.fixed;
 
   return (
-    <div className="bio">
-      {avatar && (
-        <Image
-          fixed={avatar}
-          alt={author?.name || ``}
-          className="bio-avatar"
-          imgStyle={{
-            borderRadius: `50%`,
-          }}
-        />
-      )}
-      {author?.name && (
-        <p className={'text-blue-500'}>
-          Written by <strong>{author.name}</strong> {author?.summary || null}
-          {` `}
-          <a href={`https://twitter.com/${social?.twitter || ``}`}>
-            You should follow them on Twitter
-          </a>
-        </p>
-      )}
-    </div>
+    <figure className="flex flex-row justify-center py-10">
+      <div className="flex flex-col justify-center items-center mr-10">
+        <Img fixed={bioImage} alt="dust and disquiet" />
+      </div>
+      <figcaption className="flex flex-col justify-evenly items-center ml-10">
+        <h3 className="text-3xl">Some Cool Stuff About Michael</h3>
+        {
+          author?.summary?.map((paragraph, i) => (<p key={i}>{paragraph}</p>))
+        }
+      </figcaption>
+    </figure>
   )
 }
 
